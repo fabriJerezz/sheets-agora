@@ -1,19 +1,24 @@
+
 function makeAllBackUps() {
-  const lastRow = getLastCLient()
+  const lastRow = getLastCLient();
 
-  for (var i = 1; i < lastRow; i++){ 
-    const url = getClientData(i).portfolioLink;   // Seleccionar la id de un cliente determinado
-    const ss = SpreadsheetApp.openByUrl(url);  
+  for (var i = 1; i < lastRow; i++){
+    const clientData = getClientData(i);
+    
+    if (clientData && clientData.portfolioLink) {// Seleccionar la id de un cliente determinado
+      const clientUrl = clientData.portfolioLink;
+      const ss = SpreadsheetApp.openByUrl(clientUrl);  
 
-    makePortfolioValueBackup(ss);
-    makeDolarMepBackup(ss);
-    makeAL30Backup(ss);
-    makeAL41Backup(ss);
-    makeTicker1Backup(ss);
-    makeTicker2Backup(ss);
-    makeTicker3Backup(ss);
-    makeTicker4Backup(ss);
-    makeTicker5Backup(ss);
-    makeAL30DBackup(ss);
+      buckups.forEach(backup => {
+        try {
+          backup(ss);
+        } catch (error) {
+          Logger.log(`Error en el backup ${backup.name} del cliente ${clientData.fullName} : ${error}`);
+        };
+      });
+    } else {
+      Logger.log('No se encontró la URL del cliente');
+    };
   };
 };
+

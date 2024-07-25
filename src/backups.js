@@ -6,7 +6,7 @@ function makePortfolioValueBackup (ss) {
     if (!isNaN(newValue)) {
       sheet.getRange("F6").setValue(newValue);
     };
-    
+
   } catch (error) {
     Logger.log(error);
   };
@@ -145,7 +145,18 @@ function makeAL30DBackup (ss) {
 };
 
 
-
+const buckups = [
+  makePortfolioValueBackup,
+  makeDolarMepBackup,
+  makeAL30Backup,
+  makeAL41Backup,
+  makeTicker1Backup,
+  makeTicker2Backup,
+  makeTicker3Backup,
+  makeTicker4Backup,
+  makeTicker5Backup,
+  makeAL30DBackup
+];
 
 
 
