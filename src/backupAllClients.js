@@ -13,11 +13,11 @@ function makeAllBackUps() {
         try {
           backup(ss);
         } catch (error) {
-          Logger.log(`Error en el backup ${backup.name} del cliente ${clientData.fullName} : ${error}`);
+          Logger.log(`Error en el backup ${backup.name} del cliente ${clientData.fullName}.\n Error: ${error}`);
         };
       });
     } else {
-      Logger.log('No se encontró la URL del cliente');
+      Logger.log(`No se encontró la URL del cliente "${clientData.fullName}"`);
     };
   };
 };
